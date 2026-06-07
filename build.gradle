@@ -1,0 +1,35 @@
+subprojects {
+
+    apply plugin: "java"
+
+    java {
+        toolchain {
+            languageVersion = JavaLanguageVersion.of(25)
+        }
+    }
+
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        implementation 'org.slf4j:slf4j-api:2.0.17'
+        implementation 'org.slf4j:slf4j-simple:2.0.17'
+    }
+}
+
+project(':kafka-common') {
+}
+
+project(':kafka-client') {
+    dependencies {
+        implementation project(':kafka-common')
+    }
+}
+
+project(':kafka-service') {
+    dependencies {
+        implementation project(':kafka-common')
+    }
+}
+

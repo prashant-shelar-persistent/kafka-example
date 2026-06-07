@@ -1,0 +1,32 @@
+apply plugin: 'java'
+apply plugin: 'maven-publish'
+
+repositories {
+   mavenLocal()
+   mavenCentral()
+}
+
+test {
+   useTestNG()
+   testLogging {
+      events "passed", "skipped", "failed"
+   }
+}
+
+publishing {
+   publications {
+      maven(MavenPublication) {
+         groupId = 'itx.examples.kafka'
+         artifactId = 'kafka-common'
+         version = '1.0.0'
+
+         from components.java
+      }
+   }
+}
+
+dependencies {
+   implementation 'com.fasterxml.jackson.core:jackson-databind:2.19.0'
+   implementation 'org.apache.kafka:kafka-clients:4.2.0'
+   testImplementation 'org.testng:testng:7.10.2'
+}
